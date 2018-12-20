@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>519</width>
-    <height>362</height>
+    <height>398</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,20 +16,40 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>200</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>※ 영화를 선택하세요 ※</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>※ 영화를 선택하세요 ※</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -79,12 +99,12 @@
    <slot>slot_1st()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>143</x>
-     <y>307</y>
+     <x>133</x>
+     <y>342</y>
     </hint>
     <hint type="destinationlabel">
-     <x>128</x>
-     <y>345</y>
+     <x>137</x>
+     <y>366</y>
     </hint>
    </hints>
   </connection>
@@ -95,12 +115,12 @@
    <slot>slot_2nd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>323</x>
-     <y>310</y>
+     <x>290</x>
+     <y>342</y>
     </hint>
     <hint type="destinationlabel">
-     <x>343</x>
-     <y>345</y>
+     <x>293</x>
+     <y>369</y>
     </hint>
    </hints>
   </connection>
@@ -111,12 +131,12 @@
    <slot>slot_3rd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>506</x>
-     <y>298</y>
+     <x>449</x>
+     <y>339</y>
     </hint>
     <hint type="destinationlabel">
-     <x>518</x>
-     <y>344</y>
+     <x>455</x>
+     <y>361</y>
     </hint>
    </hints>
   </connection>
@@ -125,5 +145,8 @@
   <slot>slot_1st()</slot>
   <slot>slot_2nd()</slot>
   <slot>slot_3rd()</slot>
+  <slot>slot_text_1st()</slot>
+  <slot>slot_text_2nd()</slot>
+  <slot>slot_text_3rd()</slot>
  </slots>
 </ui>

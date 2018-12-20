@@ -11,7 +11,7 @@ class MyWindow(QMainWindow):
         ## 위젯 생성코드
         self.setGeometry(200,200,400,400)
         self.setWindowTitle("Movie Ticket Record")      ## Window "name" settings
-        self.setWindowIcon(QIcon("image/icon.png"))     ## 지금 아이콘 적용이 안되고 있음... 디테일한 부분이니까 나중에..해도됨 12/20
+        self.setWindowIcon(QIcon("image/icon.png"))
 
         btn = QPushButton("Button1", self)
         btn.move(10,10)

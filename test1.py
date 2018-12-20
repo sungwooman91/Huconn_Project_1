@@ -1,51 +1,41 @@
-import sys, os
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5 import uic
+#!/usr/bin/env python
+# coding: utf-8
+
+# 예제 내용
+# * 버튼의 기본 사용법을 알아본다
+# * '창 이름'을 변경한다.
+
+import sys
+
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import pyqtSlot
+
+__author__ = "Deokyu Lim <hong18s@gmail.com>"
 
 
-class Form(QMainWindow):
-    def __init__(self, parent=None):
-        QMainWindow.__init__(self, parent)
-        self.ui = uic.loadUi("UI/ui_text1.ui", self)            ## uic.loadUi 하는 방법은 여러가지가 있다. 글로벌 변수로 ui = uic.loadUi("UI/ui_text1.ui", self)[0]으로 라이브러리 밑에다 써도 된다. 이때 무조권 Form 클래스에 하나 더 추가 시킨다.
-        self.ui.show()
+class Button(QPushButton):
+    """
+    QPushButton 은 QWidget을 상속받고 있으므로 단일 창으로 표출 가능
+    """
+    def __init__(self):
+        QPushButton.__init__(self, "0")
+        self.setFixedSize(100, 100)
+        self.click_cnt = 0
+        # 시그널이 일어나면 self._pressed를 연결
+        # pressed는 QPushButton의 부모위젯인 QAbstratButton에서 상속
+        self.pressed.connect(self._pressed)
 
+    @pyqtSlot()  # pyqtSlot 데코레이터는 꼭 필요는 없다. 하지만 메모리 사용 및 호출 속도에서 약간의 이득을 얻을 수 있다.
+    def _pressed(self):
+        """
+        클릭 수를 카운터하여 표출
+        """
+        self.click_cnt += 1
+        self.setText(str(self.click_cnt))
 
-        ## 두번째 라벨 설정
-        label2 = QLabel("",self)
-
-        ## 타이머 설정
-        self.ui.timer = QTimer(self)
-        self.ui.timer.start(1000)  ## 이벤트 발생 빈도 1초로 설정 Interval setting
-        self.ui.timer.timeout.connect(self.timeout)
-
-    @pyqtSlot()
-    def slot_1st(self):
-        pixmap = QPixmap('image/drugking.jpg')
-        pixmap_resized = pixmap.scaled(480, 240, Qt.KeepAspectRatio)
-        self.ui.label.setPixmap(pixmap_resized)
-        self.ui.label2.setText("")
-
-    @pyqtSlot()
-    def slot_2nd(self):
-        pixmap = QPixmap('image/aquaman.jpg')
-        pixmap_resized = pixmap.scaled(480, 240, Qt.KeepAspectRatio)
-        self.ui.label.setPixmap(pixmap_resized)
-
-    @pyqtSlot()
-    def slot_3rd(self):
-        pixmap = QPixmap('image/swingkids.jpg')
-        pixmap_resized = pixmap.scaled(480, 240, Qt.KeepAspectRatio)
-        self.ui.label.setPixmap(pixmap_resized)
-
-    def timeout(self):
-        cur_time = QTime.currentTime()
-        str_time = cur_time.toString("hh:mm:ss")
-        self.statusBar().showMessage(str_time)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    MyForm = Form()
-    MyForm.show()
-    app.exec_()
+    form = Button()
+    form.show()
+    exit(app.exec_())
