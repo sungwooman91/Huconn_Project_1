@@ -1,41 +1,40 @@
-#!/usr/bin/env python
-# coding: utf-8
+import urllib.request
+from bs4 import BeautifulSoup
+from pandas import DataFrame
 
-# 예제 내용
-# * 버튼의 기본 사용법을 알아본다
-# * '창 이름'을 변경한다.
+index = "index"
 
-import sys
+html = urllib.request.urlopen('http://movie.naver.com/movie/sdb/rank/rmovie.nhn')
+soup = BeautifulSoup(html,'html.parser')
 
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import pyqtSlot
+tags = soup.findAll('div',attrs={'class':'tit3'})
+rank_changes = soup.findAll('td',attrs={'class':'range ac'})
 
-__author__ = "Deokyu Lim <hong18s@gmail.com>"
+result_name = []
+for i in tags:
+    div_tag = list(i.strings)
+    if (div_tag[1]):
+        result_name.append(div_tag[1])
 
+result_change = []
+for i in rank_changes:
+    td_rank_change = list(i.strings)
+    if (td_rank_change[0]):
+        result_change.append(td_rank_change[0])
 
-class Button(QPushButton):
-    """
-    QPushButton 은 QWidget을 상속받고 있으므로 단일 창으로 표출 가능
-    """
-    def __init__(self):
-        QPushButton.__init__(self, "0")
-        self.setFixedSize(100, 100)
-        self.click_cnt = 0
-        # 시그널이 일어나면 self._pressed를 연결
-        # pressed는 QPushButton의 부모위젯인 QAbstratButton에서 상속
-        self.pressed.connect(self._pressed)
+result = []
+for i in range(len(result_name)):
+    rank = int(i)+1
+    movie_name = result_name[i]
+    change = result_change[i]
+    result.append([str(rank)] + [movie_name] + [change])
 
-    @pyqtSlot()  # pyqtSlot 데코레이터는 꼭 필요는 없다. 하지만 메모리 사용 및 호출 속도에서 약간의 이득을 얻을 수 있다.
-    def _pressed(self):
-        """
-        클릭 수를 카운터하여 표출
-        """
-        self.click_cnt += 1
-        self.setText(str(self.click_cnt))
+print(result_name)
+print(result_change)
+print(result)
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    form = Button()
-    form.show()
-    exit(app.exec_())
+print("START")
+naver_movie_table = DataFrame(result, columns=('순위','영화명','변동폭'))
+naver_movie_table.to_csv("naver_movie.csv",encoding="cp949",mode='w',index=False)
+print(naver_movie_table)
+print("END")
