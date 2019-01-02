@@ -9,7 +9,7 @@ con = pymysql.connect(user='root',
 
 cursor = con.cursor()
 
-# Create SQL
+# Create SQL table
 sql = '''CREATE TABLE movie(
             drugking int(10) unsigned NOT NULL,
             aquaman int(10) unsigned NOT NULL,

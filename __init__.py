@@ -1,4 +1,4 @@
-import sys
+import sys, pymysql
 import Dataset_Frame as df
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,15 +8,32 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
 
+## pymysql
+con = pymysql.connect(user='root',
+                      password='123456',
+                      host='localhost',
+                      port=3307,
+                      database='ticket'
+                      )
 ## 전역변수
 ticket_title = ["drugking","aquaman","swingkids"]
+
 ## matplotlib 한글화
 from matplotlib import font_manager, rc
 font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
+
 ## ui에 관한 설정을 클래서 밖에서 할 수 있다.
 form_class = uic.loadUiType("UI/ui_text11.ui")[0]
+
 ## 뒤에 [0]를 제외하면 에러가 터진다... 왜 터지는지는 알 수 없지만 나중에 알아야겠다.
+def insertTable(movie1, movie2, movie3):
+    cur = con.cursor()
+    #sql = "DELETE FROM melon_chart"
+    #cur.execute(sql)
+    sql = "INSERT INTO movie (drugking, aquaman, swingkids) VALUES (%d, %d, %d)"
+    cur.execute(sql,(movie1,movie2,movie3))
+    con.commit()
 
 class Mywindow(QMainWindow, form_class):
     def __init__(self):
@@ -107,6 +124,7 @@ class Mywindow(QMainWindow, form_class):
 
     ## 예매 현황 보기
     def showgraph(self):
+        # insertTable(moive1 =self.clickcount, movie2=self.clickcount1, movie3=self.clickcount2)
         y1_value = (self.clickcount, self.clickcount1, self.clickcount2)
         x_name = (ticket_title[0], ticket_title[1], ticket_title[2])
         n_groups = len(x_name)

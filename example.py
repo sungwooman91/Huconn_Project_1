@@ -70,7 +70,7 @@ def insertTable(_title, _singer, _album):
     cur = conn.cursor()
     #sql = "DELETE FROM melon_chart"
     #cur.execute(sql)
-    sql = "INSERT INTO melon_chart (title, singer, album) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO melon_chart (title, singer, album) VALUES (%d, %d, %d)"
     cur.execute(sql,(_title,_singer,_album))
     conn.commit()
 
