@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>696</width>
-    <height>803</height>
+    <height>761</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,13 +47,6 @@
            <widget class="QPushButton" name="pushButton_4">
             <property name="text">
              <string>예매 현황 보기</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_5">
-            <property name="text">
-             <string>PushButton</string>
             </property>
            </widget>
           </item>

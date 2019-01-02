@@ -17,4 +17,3 @@ def movie_text(tmp):
 
     return movie_context
 
-print(movie_text(movie_url))
