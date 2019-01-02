@@ -1,15 +1,19 @@
 import pymysql.cursors
 
-con = pymysql.connect(user='root', password='123456',host='localhost',    ### pymysql을 하면 버그가 하나 뜨는데 아직까지는
-                        port=3307, database='movie_title')                ### 왜 그런지는 모르겠다능... 이유를 찾았다!!! db이름이 잘못되어 있었음!! 12/18
+con = pymysql.connect(user='root',
+                      password='123456',
+                      host='localhost',
+                      port=3307,
+                      database='ticket'
+                      )
 
 cursor = con.cursor()
 
 # Create SQL
-sql = '''CREATE TABLE seller(
-            drugking int(10) unsigned NOT NULL AUTO_INCREMENT,
+sql = '''CREATE TABLE movie(
+            drugking int(10) unsigned NOT NULL,
             aquaman int(10) unsigned NOT NULL,
-            swingkids int(10) unsigned OT NULL
+            swingkids int(10) unsigned NOT NULL
             );
             '''
 
